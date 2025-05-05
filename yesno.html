@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Will You Be My Girlfriend?</title>
+  <link href="https://fonts.googleapis.com/css2?family=Sacramento&family=Dancing+Script:wght@700&display=swap" rel="stylesheet">
+  <style>
+    body {
+      margin: 0;
+      padding: 0;
+      background: linear-gradient(to bottom right, #ffe6e6, #ffcce0);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      height: 100vh;
+      font-family: 'Dancing Script', cursive;
+      color: #d6336c;
+      position: relative;
+    }
+
+    h1 {
+      font-size: 3rem;
+      margin-bottom: 20px;
+      text-shadow: 2px 2px 4px #ffb6c1;
+      z-index: 2;
+      position: absolute;
+      top: 15%; /* Adjusted to give room for the response */
+    }
+
+    .emoji {
+      font-size: 4rem; /* Larger emoji for visibility */
+      margin-bottom: 1.5rem;
+      z-index: 2;
+      position: relative;
+      animation: blink 3s infinite; /* Animation to give teary effect */
+    }
+
+    @keyframes blink {
+      0%, 100% { transform: scale(1); }
+      50% { transform: scale(1.1); } /* Makes the emoji look a bit bigger */
+    }
+
+    .buttons {
+      display: flex;
+      justify-content: space-between;
+      width: 80%;
+      z-index: 3;
+      margin-top: 20px; /* Reduced the space between buttons even more */
+    }
+
+    button {
+      font-family: 'Dancing Script', cursive;
+      font-size: 1.8rem;
+      padding: 15px 30px;
+      border: none;
+      border-radius: 30px;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      box-shadow: 0 6px 12px rgba(0,0,0,0.1);
+    }
+
+    #yesBtn {
+      background-color: #ff4d6d;
+      color: white;
+      width: auto;
+      height: 60px;
+    }
+
+    #noBtn {
+      background-color: #fff;
+      color: #ff4d6d;
+      border: 3px solid #ff4d6d;
+      width: auto;
+      height: 60px;
+    }
+
+    .response {
+      font-size: 2rem;
+      margin-top: 20px;
+      color: #fff;
+      background-color: #ff4d6d;
+      padding: 20px;
+      border-radius: 20px;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+      opacity: 0;
+      transform: translateY(-50px); /* Start from above */
+      position: absolute;
+      top: 5%; /* Position above the question */
+      left: 50%;
+      transform: translateX(-50%) translateY(0); /* Center the message box */
+      width: auto;
+      height: auto;
+      transition: opacity 0.5s, transform 0.5s;
+    }
+
+    .show {
+      opacity: 1;
+      transform: translateX(-50%) translateY(0); /* Smooth slide down */
+    }
+
+    .hearts {
+      position: absolute;
+      bottom: 20px;
+      font-size: 2rem;
+      opacity: 0.3;
+      animation: float 6s linear infinite;
+      z-index: 1;
+    }
+
+    @keyframes float {
+      0% { transform: translateY(0); }
+      100% { transform: translateY(-100vh); }
+    }
+  </style>
+</head>
+<body>
+
+  <h1><span style="font-weight: bold;">Will</span> you be my girlfriend?</h1>
+  <div class="emoji">🥺</div> <!-- Smiling face with watery eyes effect -->
+
+  <div class="buttons">
+    <button id="yesBtn">Yes, I love youu 💖</button>
+    <button id="noBtn">Sorry, better luck next time!</button>
+  </div>
+
+  <div class="response" id="responseText"></div>
+
+  <!-- Decorative floating hearts -->
+  <div class="hearts" style="left: 20%;">💘</div>
+  <div class="hearts" style="left: 40%; animation-delay: 1s;">💕</div>
+  <div class="hearts" style="left: 60%; animation-delay: 2s;">💞</div>
+  <div class="hearts" style="left: 80%; animation-delay: 3s;">❤️</div>
+
+  <script>
+    const yesBtn = document.getElementById('yesBtn');
+    const noBtn = document.getElementById('noBtn');
+    const responseText = document.getElementById('responseText');
+
+    let yesSize = 1;
+
+    yesBtn.addEventListener('click', () => {
+      // Set the response text and show the pop-up
+      responseText.textContent = "Yaaay!! 😍 I love you too ❤️";
+      responseText.classList.add('show'); // Trigger the show class to make the response pop up
+    });
+
+    noBtn.addEventListener('click', () => {
+      yesSize += 0.2; // Incrementally grow the "Yes" button size
+      yesBtn.style.transform = `scale(${yesSize})`;
+      responseText.textContent = ""; // Clear the response when "No" is clicked
+      responseText.classList.remove('show'); // Hide the response
+    });
+  </script>
+</body>
+</html>
